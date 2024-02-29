@@ -1,0 +1,72 @@
+
+ *{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body{
+  font-family: sans-serif;
+  background-color: teal;
+}
+.form-wrapper{
+ padding: 20px;
+ border-radius: 10px;
+ margin: 100px auto;
+ background-color: white;
+  width: 450px;
+}
+form{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+form > label> input{
+  padding: 8px;
+  border-radius: 10px;
+  width: 250px;
+  outline: none;
+  border: 0.5px solid rgb(102, 99, 99);
+}
+.form > button{
+  background-color: teal;
+  color: white;
+  padding: 8px;
+  border: none;
+  width: 80px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.list{
+  margin-top: 20px;
+}
+.list >li{
+  background-color: lightgray;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 10px;
+}
+.btn-wrapper{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.btn-wrapper >button{
+  background-color: red;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+.btn-wrapper >button:nth-child(2){
+  background-color: rgb(72, 61, 231);
+}
+.todo-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

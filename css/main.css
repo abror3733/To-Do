@@ -29,7 +29,13 @@ form > label> input{
   border-radius: 10px;
   width: 250px;
   outline: none;
-  border: 0.5px solid rgb(102, 99, 99);
+  border: 0.2px solid rgb(161, 157, 157);
+}
+input{
+  transition: all 0.3s ease;
+}
+input:hover{
+  box-shadow: 0 0 5px 5px rgba(0,0,0,0.2); 
 }
 .form > button{
   background-color: teal;
@@ -50,7 +56,7 @@ form > label> input{
   background-color: lightgray;
   padding: 10px;
   border-radius: 8px;
-  margin: 10px;
+  margin: 0;
 }
 .btn-wrapper{
   display: flex;
@@ -94,7 +100,6 @@ form > label> input{
   left: 0;
   border-radius: 20px;
   margin: auto;
-  transition: transform 3s ease;
 }
 .open-modal{
   display: block;
@@ -128,6 +133,11 @@ form > label> input{
   justify-content: space-between;
   padding-top: 30px;
 }
+.delete-wrapper > div{
+ display: flex;
+ align-items: center;
+ gap: 60px;
+}
 .delete-wrapper > div > button{
   padding: 10px;
   width: 150px;
@@ -144,4 +154,55 @@ form > label> input{
 .complate{
   opacity: 0.5;
   text-decoration: line-through;
+}
+.card-btn {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.card-btn > button{
+padding: 6px;
+background-color: rgb(100, 97, 97);
+color: white;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+button{
+  transition: opacity 0.3s ease;
+}
+button:hover{
+  opacity: 0.7;
+}
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+.check-wrapper{
+  height: 18px;
+  width: 18px;
+  border: 1px solid black;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+}
+.check-inner{
+  position: absolute;
+  inset: 2px;
+  background-color: rgb(19, 17, 17);
+  border-radius: 50%;
+  display: none;
+}
+.check-open{
+  display: block;
+  position: absolute;
+  inset: 2px;
+  background-color: rgb(19, 17, 17);
+  border-radius: 50%;
 }

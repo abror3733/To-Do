@@ -5,33 +5,57 @@ let elList =document.querySelector(".list")
 let elModalWrapper =document.querySelector(".modal-wrapper")
 let elModal =document.querySelector(".modal")
 
-let todus =[]
+
+let elCount =document.querySelector(".all-count")
+let elCompletedCount =document.querySelector(".completed-count")
+let elUncompletedCount =document.querySelector(".uncompleted-count")
+
+let todus =JSON.parse(window.localStorage.getItem("todus")) || []
 elForm.addEventListener("submit", function(evt){
  evt.preventDefault()
- let data = {
-   id:todus.length + 1,
-   value:elInput.value,
-   isComplate: false
+ if(evt.target[0].value .trim() != ""){
+  let data = {
+    id:todus.length + 1,
+    value:elInput.value,
+    isComplate: false
+  }
+  todus.push(data)
+  renderTodo(todus,elList)
+  evt.target.reset()
+  window.localStorage.setItem("todus",JSON.stringify(todus))
+
  }
- todus.push(data)
- renderTodo(todus,elList)
- evt.target.reset()
+ else{
+  alert("Place Inputni to'ldiring  ")
+ }
+
 })
+
+
+// window.localStorage.setItem("todus",JSON.stringify(todus))
+renderTodo(todus,elList)
+
 
 // -------renderTodo start --------
 
 function renderTodo(arr,list){
   list.innerHTML = "";
-  arr.map(item=>{
+  
+  arr.map((item,index)=>{
     let elItem =document.createElement("li")
     elItem.classList.add("todo-item")
     elItem.innerHTML  = `
     <div class ="value-wrapper ${item.isComplate ? "complate" : ""}">
-    <span>${item.id}.</span>
+    <span>${index + 1}.</span>
     <strong>${item.value}</strong>
     </div>
     <div class="btn-wrapper">
-    <input class ="checkbox-todo" id="${item.id}" type = "checkbox"/>
+      <label>
+      <input class ="checkbox-todo visually-hidden" id="${item.id}" type = "checkbox"/>
+      <div class="check-wrapper">
+        <span class=${item.isComplate ? "check-open" : "check-inner"}></span>
+      </div>
+      </label>
     <button onclick="updateClick(${item.id})">Update</button>
     <button onclick="deleteClick(${item.id})">Delete</button>
     </div>
@@ -40,7 +64,26 @@ function renderTodo(arr,list){
 
     list.appendChild(elItem)
   })
+
+  elCount.textContent = todus.length
+  elCompletedCount.textContent=todus.filter(item=>item.isComplate==true).length
+  elUncompletedCount.textContent=todus.filter(item=>item.isComplate==false).length
+
 }
+
+
+elCount.parentElement.addEventListener("click",function(){
+  renderTodo(todus,elList)
+})
+elCompletedCount.parentElement.addEventListener("click", function(){
+let data = todus.filter(item=>item.isComplate==true)
+renderTodo(data,elList)
+})
+elUncompletedCount.parentElement.addEventListener("click", function(){
+  let data = todus.filter(item=>item.isComplate==false)
+  renderTodo(data,elList)
+  })
+
 // -------renderTodo end --------
 
 // -------update start -------
@@ -63,6 +106,7 @@ function updateBtnClick(id){
     data.value= elUpdateValue
     elModalWrapper.classList.remove("open-modal")
     renderTodo(todus,elList) 
+    window.localStorage.setItem("todus",JSON.stringify(todus))
 }
 
 // -------update end -------
@@ -89,6 +133,8 @@ function deleteSureBtn(id){
   todus.splice(data,1)
   elModalWrapper.classList.remove("open-modal")
   renderTodo(todus,elList)
+  window.localStorage.setItem("todus",JSON.stringify(todus))
+
 }
 // -------delete end -------
 
@@ -107,6 +153,8 @@ elList.addEventListener("click",function(evt){
     let data =todus.find(item=>item.id == evt.target.id)
     data.isComplate = !data.isComplate
     renderTodo(todus,elList)
+    window.localStorage.setItem("todus",JSON.stringify(todus))
+
   }
 })
 // -------Checkbox end -------
